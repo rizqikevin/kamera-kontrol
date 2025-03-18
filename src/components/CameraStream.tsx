@@ -112,10 +112,10 @@ const CameraStream = ({
           </div>
         ) : (
           <div className="w-full h-full">
-            {/* Stream from the Motion server */}
+            {/* Stream from the camera API */}
             <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-gray-900 to-black">
               <img
-                src={`${streamUrl.replace(/\/+$/, "")}/0/stream`}
+                src={`http://192.168.1.27:3000/stream`}
                 alt="Camera feed"
                 className="w-full h-full object-cover"
                 onError={() => {

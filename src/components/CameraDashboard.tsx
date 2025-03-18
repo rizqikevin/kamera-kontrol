@@ -255,7 +255,7 @@ const CameraDashboard = ({
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 flex-1">
         <div className="lg:col-span-2">
           <CameraStream
-            streamUrl={`${apiEndpoint}/${cameraId}/stream`}
+            streamUrl="http://192.168.1.27:3000"
             cameraName={cameraName}
             onError={(error) => {
               toast({
