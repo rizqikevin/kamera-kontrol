@@ -4,6 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import MovementControls from "./MovementControls";
 import CameraSettings from "./CameraSettings";
 import SystemActions from "./SystemActions";
+import AdvancedSettings from "./AdvancedSettings";
 
 interface ControlPanelProps {
   isConnected?: boolean;
@@ -41,9 +42,10 @@ const ControlPanel = ({
       </CardHeader>
       <CardContent>
         <Tabs defaultValue="movement" className="w-full">
-          <TabsList className="grid grid-cols-3 mb-4">
+          <TabsList className="grid grid-cols-4 mb-4">
             <TabsTrigger value="movement">Movement</TabsTrigger>
             <TabsTrigger value="settings">Settings</TabsTrigger>
+            <TabsTrigger value="advanced">Advanced</TabsTrigger>
             <TabsTrigger value="actions">Actions</TabsTrigger>
           </TabsList>
           <TabsContent value="movement" className="space-y-4">
@@ -61,6 +63,9 @@ const ControlPanel = ({
               onFrameRateChange={onFrameRateChange}
               onNightModeToggle={onNightModeToggle}
             />
+          </TabsContent>
+          <TabsContent value="advanced" className="space-y-4">
+            <AdvancedSettings />
           </TabsContent>
           <TabsContent value="actions" className="space-y-4">
             <SystemActions

@@ -112,12 +112,16 @@ const CameraStream = ({
           </div>
         ) : (
           <div className="w-full h-full">
-            {/* This would be replaced with actual video stream component */}
+            {/* Stream from the Motion server */}
             <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-gray-900 to-black">
               <img
-                src="https://images.unsplash.com/photo-1520257119747-9591a2d38f99?w=800&q=80"
+                src={`${streamUrl.replace(/\/+$/, "")}/0/stream`}
                 alt="Camera feed"
                 className="w-full h-full object-cover"
+                onError={() => {
+                  setStreamError(true);
+                  if (onError) onError("Failed to load camera stream");
+                }}
               />
               <div className="absolute bottom-4 right-4 bg-black/50 text-white px-2 py-1 rounded text-sm">
                 Live

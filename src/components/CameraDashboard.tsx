@@ -205,10 +205,10 @@ const CameraDashboard = ({
 
   const handleToggleRecording = async () => {
     try {
-      // Use the real API to start or stop the stream
+      // Use the real API to start or stop recording
       const result = isRecording
-        ? await cameraApi.stopStream()
-        : await cameraApi.startStream();
+        ? await cameraApi.stopRecording()
+        : await cameraApi.startRecording();
 
       setIsRecording(!isRecording);
       toast({

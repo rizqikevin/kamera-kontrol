@@ -3,6 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import { Button } from "./ui/button";
 import { Camera, Video, Maximize, Download } from "lucide-react";
 import { useToast } from "./ui/use-toast";
+import { cameraApi } from "../lib/cameraApi";
 
 interface SystemActionsProps {
   onTakeScreenshot?: () => Promise<void>;
@@ -43,10 +44,15 @@ const SystemActions = ({
   const handleTakeScreenshot = async () => {
     setIsLoading((prev) => ({ ...prev, screenshot: true }));
     try {
+      // Call the API to capture an image
+      const result = await cameraApi.captureImage();
+
+      // Also call the original handler for compatibility
       await onTakeScreenshot();
+
       toast({
         title: "Screenshot taken",
-        description: "Screenshot has been saved successfully",
+        description: result.message || "Screenshot has been saved successfully",
       });
     } catch (error) {
       toast({
@@ -62,13 +68,22 @@ const SystemActions = ({
   const handleToggleRecording = async () => {
     setIsLoading((prev) => ({ ...prev, recording: true }));
     try {
+      // Call the API to start or stop recording
+      const result = isRecording
+        ? await cameraApi.stopRecording()
+        : await cameraApi.startRecording();
+
+      // Also call the original handler for compatibility
       await onToggleRecording();
+
       setIsRecording(!isRecording);
       toast({
         title: isRecording ? "Recording stopped" : "Recording started",
-        description: isRecording
-          ? "Your recording has been saved"
-          : "Camera is now recording",
+        description:
+          result.message ||
+          (isRecording
+            ? "Your recording has been saved"
+            : "Camera is now recording"),
       });
     } catch (error) {
       toast({

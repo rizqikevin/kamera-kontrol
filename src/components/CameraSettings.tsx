@@ -84,11 +84,16 @@ const CameraSettings = ({
 
     setIsLoading((prev) => ({ ...prev, frameRate: true }));
     try {
+      // Call the API to change frame rate
+      const result = await cameraApi.changeFrameRate(value);
+
+      // Also call the original handler for compatibility
       await onFrameRateChange(value);
+
       setFrameRate(value);
       toast({
         title: "Frame rate updated",
-        description: `Camera frame rate set to ${value} fps`,
+        description: result.message || `Camera frame rate set to ${value} fps`,
       });
     } catch (error) {
       toast({

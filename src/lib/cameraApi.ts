@@ -36,4 +36,76 @@ export const cameraApi = {
       throw error;
     }
   },
+
+  changeFrameRate: async (framerate: number) => {
+    try {
+      const response = await fetch(`${API_BASE_URL}/framerate`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ framerate }),
+      });
+      return await response.json();
+    } catch (error) {
+      console.error("Failed to change frame rate:", error);
+      throw error;
+    }
+  },
+
+  captureImage: async () => {
+    try {
+      const response = await fetch(`${API_BASE_URL}/capture`);
+      return await response.json();
+    } catch (error) {
+      console.error("Failed to capture image:", error);
+      throw error;
+    }
+  },
+
+  startRecording: async () => {
+    try {
+      const response = await fetch(`${API_BASE_URL}/start-recording`);
+      return await response.json();
+    } catch (error) {
+      console.error("Failed to start recording:", error);
+      throw error;
+    }
+  },
+
+  stopRecording: async () => {
+    try {
+      const response = await fetch(`${API_BASE_URL}/stop-recording`);
+      return await response.json();
+    } catch (error) {
+      console.error("Failed to stop recording:", error);
+      throw error;
+    }
+  },
+
+  changeMovieQuality: async (quality: number) => {
+    try {
+      const response = await fetch(`${API_BASE_URL}/movie-quality`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ quality }),
+      });
+      return await response.json();
+    } catch (error) {
+      console.error("Failed to change movie quality:", error);
+      throw error;
+    }
+  },
+
+  changePictureOutput: async (mode: string) => {
+    try {
+      const response = await fetch(`${API_BASE_URL}/picture-output`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ mode }),
+      });
+      return await response.json();
+    } catch (error) {
+      console.error("Failed to change picture output mode:", error);
+      throw error;
+    }
+  },
 };
